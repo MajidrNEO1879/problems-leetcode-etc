@@ -73,8 +73,21 @@ print_r(arrayProduct2($nums));
 
 
 
-/**A sentence is a list of words that are separated by a single space with no leading or trailing spaces.
+/**You are given an integer array nums. In one operation, you can add or subtract 1 from any element of nums.
+Return the minimum number of operations to make all elements of nums divisible by 3 */
 
-You are given an array of strings sentences, where each sentences[i] represents a single sentence.
+function minOperations($nums) {
+    $totalOperations = 0;
+    foreach ($nums as $num) {
+        $remainder = $num % 3;
+        if ($remainder == 1 || $remainder == 2) {
+            $totalOperations += min($remainder, 3 - $remainder);
+        }
+    }
+    return $totalOperations;
+}
+print_r(minOperations([2,5,8,11]));
 
-Return the maximum number of words that appear in a single sentence. */
+/**Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+There is only one repeated number in nums, return this repeated number.
+You must solve the problem without modifying the array nums and uses only constant extra space. */
