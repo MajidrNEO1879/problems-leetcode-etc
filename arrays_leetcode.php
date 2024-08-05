@@ -88,6 +88,29 @@ function minOperations($nums) {
 }
 print_r(minOperations([2,5,8,11]));
 
-/**Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
-There is only one repeated number in nums, return this repeated number.
-You must solve the problem without modifying the array nums and uses only constant extra space. */
+// Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
+
+function containsDuplicatehashSet(array $nums) {
+    $hashset = [];
+    foreach ($nums as $num) {
+        if (isset($hashset[$num])) {
+            return true;
+        }
+        $hashset[$num] = true;
+    }
+    return false;
+}
+var_dump(containsDuplicatehashSet([1,2,3,4,1]));
+function containsDuplicateBruteforce(array $nums) {
+    $n = count($nums);
+    for ($i = 0; $i < $n - 1; $i++) {
+        for ($j = $i + 1; $j < $n; $j++) {
+            if ($nums[$i] == $nums[$j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+var_dump(containsDuplicateBruteforce([1,2,3,4,1])); 
