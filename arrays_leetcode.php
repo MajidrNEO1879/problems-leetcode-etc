@@ -20,7 +20,7 @@ function values($nums, $original) {
 $nums = [5, 3, 6, 1, 12];
 $original = 3;
 $result = values($nums, $original);
-echo "Final value: " . $result;
+//echo "Final value: " . $result;
 
 
 /**Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
@@ -46,7 +46,7 @@ function arrayProduct1(array $array)
    }
    return $result;
 }
-print_r(arrayProduct1([-1,1,0,-3,3]));
+//print_r(arrayProduct1([-1,1,0,-3,3]));
 
 //o(n) run time:
 function arrayProduct2(array $nums) {
@@ -69,7 +69,7 @@ function arrayProduct2(array $nums) {
 }
 
 $nums = [1,2,3,4];
-print_r(arrayProduct2($nums));
+//print_r(arrayProduct2($nums));
 
 
 
@@ -86,7 +86,7 @@ function minOperations($nums) {
     }
     return $totalOperations;
 }
-print_r(minOperations([2,5,8,11]));
+//print_r(minOperations([2,5,8,11]));
 
 // Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
 
@@ -100,7 +100,7 @@ function containsDuplicatehashSet(array $nums) {
     }
     return false;
 }
-var_dump(containsDuplicatehashSet([1,2,3,4,1]));
+//var_dump(containsDuplicatehashSet([1,2,3,4,1]));
 function containsDuplicateBruteforce(array $nums) {
     $n = count($nums);
     for ($i = 0; $i < $n - 1; $i++) {
@@ -113,4 +113,99 @@ function containsDuplicateBruteforce(array $nums) {
     return false;
 }
 
-var_dump(containsDuplicateBruteforce([1,2,3,4,1])); 
+//var_dump(containsDuplicateBruteforce([1,2,3,4,1])); 
+
+
+// Given an array of integers nums, return the length of the longest consecutive sequence of elements.
+// A consecutive sequence is a sequence of elements in which each element is exactly 1 greater than the previous element.
+// You must write an algorithm that runs in O(n) time.
+
+// function usingSort($array)
+// {
+//     sort($array);
+//     $longSeq = 0;
+//     foreach($array as $num)
+//     {
+//         if (in_array($num+1,$array))
+//         {   
+//             $longSeq +=1;
+//         }
+//         if(in_array($num));
+//     }
+//     return $longSeq;
+// }   
+
+//print_r(usingSort([100,200,1,2,3,4]));
+
+
+
+// Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. 
+//That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+// Return the answer in an array.
+function smallerNumbersThanCurrent($nums) {
+    $count = count($nums);
+    $result = array_fill(0, $count, 0);
+    
+    for ($i = 0; $i < $count; $i++) {
+        for ($j = 0; $j < $count; $j++) {
+            if ($i != $j && $nums[$j] < $nums[$i]) {
+                $result[$i]++;
+            }
+        }
+    }
+    
+    return $result;
+}
+$nums = [8, 1, 2, 2, 3];
+$output = smallerNumbersThanCurrent($nums);
+//print_r($output);
+
+
+function smallerNumbersThanCurrent1($nums) {
+    $count = count($nums);
+    $max = max($nums);
+    
+    $frequency = array_fill(0, $max + 1, 0);
+    foreach ($nums as $num) {
+        $frequency[$num]++;
+    }
+    
+    for ($i = 1; $i <= $max; $i++) {
+        $frequency[$i] += $frequency[$i - 1];
+    }
+    
+    $result = [];
+    foreach ($nums as $num) {
+        if ($num == 0) {
+            $result[] = 0;
+        } else {
+            $result[] = $frequency[$num - 1];
+        }
+    }
+    
+    return $result;
+}
+$nums = [8, 1, 2, 2, 3];
+$output = smallerNumbersThanCurrent1($nums);
+//print_r($output);
+
+
+
+// Given an integer array nums and an integer k, return the k most frequent elements within the array.
+// The test cases are generated such that the answer is always unique.
+// You may return the output in any order.
+
+$nums = [];
+$frequency;
+
+// function kElements($nums, $k)
+// {
+
+// }
+function frequency($nums)
+{
+    foreach($nums as $item){
+        echo $item;
+    }
+}
+frequency([1,2,3,4,5]);
