@@ -7,13 +7,14 @@
 //     Repeat this process with the new number as long as you keep finding the number.
 
 // Return the final value of original.
-function values($nums, $original) {
+function values($nums, $original)
+{
     $numSet = array_flip($nums);
-    
+
     while (isset($numSet[$original])) {
         $original *= 2;
     }
-    
+
     return $original;
 }
 
@@ -29,27 +30,26 @@ You must write an algorithm that runs in O(n) time and without using the divisio
 
 //this is running in o(n^2)
 function arrayProduct1(array $array)
-{   
+{
     $arrayproduct = [];
     $result = [];
-    
-    foreach($array as $index => $number)
-    {
+
+    foreach ($array as $index => $number) {
         $tempArray = $array;
         unset($tempArray[$index]);
         $arrayproduct[] = array_values($tempArray);
-        
+
     }
-   foreach($arrayproduct as $product)
-   {
-    $result []=array_product($product);
-   }
-   return $result;
+    foreach ($arrayproduct as $product) {
+        $result[] = array_product($product);
+    }
+    return $result;
 }
 //print_r(arrayProduct1([-1,1,0,-3,3]));
 
 //o(n) run time:
-function arrayProduct2(array $nums) {
+function arrayProduct2(array $nums)
+{
     $n = count($nums);
     $answer = array_fill(0, $n, 1);
     // Calculate prefix products
@@ -58,17 +58,17 @@ function arrayProduct2(array $nums) {
         $answer[$i] *= $prefix;
         $prefix *= $nums[$i];
     }
-        // Calculate suffix products and combine with prefix products
-        $suffix = 1;
+    // Calculate suffix products and combine with prefix products
+    $suffix = 1;
     for ($i = $n - 1; $i >= 0; $i--) {
         $answer[$i] *= $suffix;
         $suffix *= $nums[$i];
     }
-    
+
     return $answer;
 }
 
-$nums = [1,2,3,4];
+$nums = [1, 2, 3, 4];
 //print_r(arrayProduct2($nums));
 
 
@@ -76,7 +76,8 @@ $nums = [1,2,3,4];
 /**You are given an integer array nums. In one operation, you can add or subtract 1 from any element of nums.
 Return the minimum number of operations to make all elements of nums divisible by 3 */
 
-function minOperations($nums) {
+function minOperations($nums)
+{
     $totalOperations = 0;
     foreach ($nums as $num) {
         $remainder = $num % 3;
@@ -90,7 +91,8 @@ function minOperations($nums) {
 
 // Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
 
-function containsDuplicatehashSet(array $nums) {
+function containsDuplicatehashSet(array $nums)
+{
     $hashset = [];
     foreach ($nums as $num) {
         if (isset($hashset[$num])) {
@@ -101,7 +103,8 @@ function containsDuplicatehashSet(array $nums) {
     return false;
 }
 //var_dump(containsDuplicatehashSet([1,2,3,4,1]));
-function containsDuplicateBruteforce(array $nums) {
+function containsDuplicateBruteforce(array $nums)
+{
     $n = count($nums);
     for ($i = 0; $i < $n - 1; $i++) {
         for ($j = $i + 1; $j < $n; $j++) {
@@ -142,10 +145,11 @@ function containsDuplicateBruteforce(array $nums) {
 // Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. 
 //That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
 // Return the answer in an array.
-function smallerNumbersThanCurrent($nums) {
+function smallerNumbersThanCurrent($nums)
+{
     $count = count($nums);
     $result = array_fill(0, $count, 0);
-    
+
     for ($i = 0; $i < $count; $i++) {
         for ($j = 0; $j < $count; $j++) {
             if ($i != $j && $nums[$j] < $nums[$i]) {
@@ -153,7 +157,7 @@ function smallerNumbersThanCurrent($nums) {
             }
         }
     }
-    
+
     return $result;
 }
 $nums = [8, 1, 2, 2, 3];
@@ -161,19 +165,20 @@ $output = smallerNumbersThanCurrent($nums);
 //print_r($output);
 
 
-function smallerNumbersThanCurrent1($nums) {
+function smallerNumbersThanCurrent1($nums)
+{
     $count = count($nums);
     $max = max($nums);
-    
+
     $frequency = array_fill(0, $max + 1, 0);
     foreach ($nums as $num) {
         $frequency[$num]++;
     }
-    
+
     for ($i = 1; $i <= $max; $i++) {
         $frequency[$i] += $frequency[$i - 1];
     }
-    
+
     $result = [];
     foreach ($nums as $num) {
         if ($num == 0) {
@@ -182,7 +187,7 @@ function smallerNumbersThanCurrent1($nums) {
             $result[] = $frequency[$num - 1];
         }
     }
-    
+
     return $result;
 }
 $nums = [8, 1, 2, 2, 3];
@@ -204,8 +209,59 @@ $frequency;
 // }
 function frequency($nums)
 {
-    foreach($nums as $item){
+    foreach ($nums as $item) {
         echo $item;
     }
 }
-frequency([1,2,3,4,5]);
+//frequency([1,2,3,4,5]);
+
+
+//string with unique characters::
+
+function stringUnique($string)
+{
+    $cleanedString = strtolower(preg_replace('/[^a-z]/', '', $string));
+    $chars = str_split($cleanedString);
+    $charCounts = array_occurences($chars);
+    //$charCounts = array_count_values($chars);
+    print_r($charCounts);
+    foreach ($charCounts as $freq) {
+        if ($freq > 1) {
+            echo 'there is a character repetition';
+            return;
+        }
+    }
+    echo 'There is no character repetition';
+    return true;
+}
+$string = 'str';
+$result = stringUnique($string);
+//var_dump($result);
+
+$list = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple', 'kiwi'];
+function array_occurences($list)
+{
+    $occurrences = [];
+    foreach ($list as $item) {
+        if (array_key_exists($item, $occurrences)) {
+            $occurrences[$item]++;
+        } else {
+            $occurrences[$item] = 1;
+        }
+    }
+    echo "Number of occurrences:\n";
+    foreach ($occurrences as $item => $count) {
+        echo "$item: $count\n";
+    }
+}
+
+
+
+$items = [1, 2, 2, 3, 4, 5, 2];
+//print_r(array_count_values($items));
+
+
+//given two string , write a mthod to find if one is permutation of the other.
+
+
+
