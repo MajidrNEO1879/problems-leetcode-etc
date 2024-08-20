@@ -90,11 +90,77 @@ $linkedlist->append(12);
 $linkedlist->append(15);
 $linkedlist->append(30);
 
-echo "Original List: ";
-$linkedlist->printList();
+// echo "Original List: ";
+// $linkedlist->printList();
 
-$linkedlist->insertGCDNodes();
+// $linkedlist->insertGCDNodes();
 
-echo "Updated List with GCD Nodes: ";
-$linkedlist->printList();
+// echo "Updated List with GCD Nodes: ";
+// $linkedlist->printList();
 
+
+
+/**An integer n is strictly palindromic if, for every base b between 2 and n - 2 (inclusive), the string representation of the integer n in base b is palindromic.
+Given an integer n, return true if n is strictly palindromic and false otherwise.
+A string is palindromic if it reads the same forward and backward.*/
+
+class BaseConversionResults
+{
+    public $number;
+    
+    public function __construct($number)
+    {
+        $this->number = $number;
+    }
+    
+    private function convertToBase($n, $b)
+    {
+        $convertedNumber = '';
+        while ($n > 0)
+        {
+            $remainder = $n % $b;
+            $n = intdiv($n, $b);
+            $convertedNumber = $remainder . $convertedNumber;
+        }
+        return $convertedNumber;
+    }
+    
+    private function isPalindrome($str)
+    {
+        return $str === strrev($str);
+    }
+    public function isStrictlyPalindromic()
+    {
+        for ($b = 2; $b <= $this->number - 2; $b++)
+        {            $convertedNumber = $this->convertToBase($this->number, $b);
+            
+            if (!$this->isPalindrome($convertedNumber))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+$n = 4;
+$conversion = new BaseConversionResults($n);
+$result = $conversion->isStrictlyPalindromic();
+
+echo $result ? "True" : "False";
+
+
+// You are given an array points where points[i] = [xi, yi] is the coordinates of the ith point on a 2D plane. Multiple points can have the same coordinates.
+// You are also given an array queries where queries[j] = [xj, yj, rj] describes a circle centered at (xj, yj) with a radius of rj.
+// For each query queries[j], compute the number of points inside the jth circle. Points on the border of the circle are considered inside.
+// Return an array answer, where answer[j] is the answer to the jth query.
+
+
+
+// Anti-theft security devices are activated inside a bank. You are given a 0-indexed binary string array bank representing the floor 
+//plan of the bank, which is an m x n 2D matrix. bank[i] represents the ith row, 
+// consisting of '0's and '1's. '0' means the cell is empty, while'1' means the cell has a security device.
+// There is one laser beam between any two security devices if both conditions are met:
+//     The two devices are located on two different rows: r1 and r2, where r1 < r2.
+//     For each row i where r1 < i < r2, there are no security devices in the ith row.
+// Laser beams are independent, i.e., one beam does not interfere nor join with another.
+// Return the total number of laser beams in the ban
