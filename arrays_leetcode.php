@@ -235,25 +235,25 @@ function stringUnique($string)
     return true;
 }
 $string = 'str';
-$result = stringUnique($string);
+//$result = stringUnique($string);
 //var_dump($result);
 
-$list = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple', 'kiwi'];
-function array_occurences($list)
-{
-    $occurrences = [];
-    foreach ($list as $item) {
-        if (array_key_exists($item, $occurrences)) {
-            $occurrences[$item]++;
-        } else {
-            $occurrences[$item] = 1;
-        }
-    }
-    echo "Number of occurrences:\n";
-    foreach ($occurrences as $item => $count) {
-        echo "$item: $count\n";
-    }
-}
+// $list = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple', 'kiwi'];
+// function array_occurences($list)
+// {
+//     $occurrences = [];
+//     foreach ($list as $item) {
+//         if (array_key_exists($item, $occurrences)) {
+//             $occurrences[$item]++;
+//         } else {
+//             $occurrences[$item] = 1;
+//         }
+//     }
+//     echo "Number of occurrences:\n";
+//     foreach ($occurrences as $item => $count) {
+//         echo "$item: $count\n";
+//     }
+// }
 
 
 
@@ -263,5 +263,68 @@ $items = [1, 2, 2, 3, 4, 5, 2];
 
 //given two string , write a mthod to find if one is permutation of the other.
 
+function permutationNum($number)
+{
+    $result = 1;
+    for ($i = $number; $i > 0; $i--) {
+        $result *= $i;
+    }
+    echo $result;
+}
 
+
+// Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers.
+//Then print the respective minimum and maximum values as a single line of two space-separated long integers. 
+
+
+function minAndmax(array $arr)
+{
+    $min=0;
+    $max=0;
+    sort($arr);
+    print_r($arr);
+    for($i=0;$i<count($arr)-1;$i++)
+    {
+        $min +=$arr[$i];
+    }
+    $x = array_reverse($arr);
+    print_r($x);
+    for($i=0;$i<count($x)-1;$i++)
+    {
+        $max += $x[$i];
+    }
+    print_r($min);
+    print_r($max);
+    // sort($arr); 
+    // $min = array_sum(array_slice($arr, 0, 4));
+    // $max = array_sum(array_slice($arr, 1, 5));
+    // echo $min . ' ' . $max;
+}
+// minAndmax([1 ,2 ,3 ,4 ,5]);
+
+// You are in charge of the cake for a child's birthday. You have decided the cake will have one candle for each year of their total age. 
+// They will only be able to blow out the tallest of the candles. Count how many candles are tallest. 
+
+function birthday($arr)
+{   
+    $maxValue = max($arr);
+    $maxnumrep = 0;
+    foreach ($arr as $value) {
+        if ($value == $maxValue) {
+            $maxnumrep++;
+        }
+    }
+    return $maxnumrep;
+}
+print_r(birthday([4,4,0,1,3]));
+
+
+// We define subsequence as any subset of an array. We define a subarray as a contiguous subsequence in an array.
+
+// Given an array, find the maximum possible sum among:
+
+//     all nonempty subarrays.
+//     all nonempty subsequences.
+
+// Print the two values as space-separated integers on one line.
 
