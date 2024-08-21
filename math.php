@@ -170,7 +170,39 @@ function isBoomerang($points) {
     return false;
 }
 $points = [[1,1],[2,3],[3,2]];
-echo isBoomerang($points) ? 'true' : 'false';
+//echo isBoomerang($points) ? 'true' : 'false';
+
+//A range [a,b] is the set of all integers from a to b (inclusive).
+//Return the smallest sorted list of ranges that cover all the numbers
+//in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer 
+//x such that x is in one of the ranges but not in nums.
+function rangeDetect($array)
+{
+    sort($array);
+    $allintList = [];
+    $start = null;
+    $end = null;
+
+    foreach ($array as $key => $num) {
+        if ($key == 0 || $num != $array[$key - 1] + 1) {
+            if ($start !== null && $end !== null) {
+                $allintList[] = $start . '-' . $end;
+            }
+            $start = $num;
+            $end = $num;
+        } else {
+            $end = $num;
+        }
+    }
+
+    if ($start !== null && $end !== null) {
+        $allintList[] = $start . '-' . $end;
+    }
+
+    return $allintList;
+}
+
+print_r(rangeDetect([1, 2, 3, 5]));
 
 
 // You are given an array points where points[i] = [xi, yi] is the coordinates of the ith point on a 2D plane. Multiple points can have the same coordinates.
