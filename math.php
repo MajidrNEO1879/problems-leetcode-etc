@@ -146,13 +146,40 @@ $n = 4;
 $conversion = new BaseConversionResults($n);
 $result = $conversion->isStrictlyPalindromic();
 
-echo $result ? "True" : "False";
+//echo $result ? "True" : "False";
+
+
+//Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.
+//A boomerang is a set of three points that are all distinct and not in a straight line.
+function isBoomerang($points) {
+    $coords = [];
+    
+    foreach ($points as $point) {
+        $coords[] = $point;
+    }
+    
+    if ($coords[0] == $coords[1] || $coords[0] == $coords[2] || $coords[1] == $coords[2]) {
+        return false;
+    }
+
+    if (($coords[1][0] - $coords[0][0]) * ($coords[2][1] - $coords[0][1]) != 
+        ($coords[2][0] - $coords[0][0]) * ($coords[1][1] - $coords[0][1])) {
+        return true;
+    }
+
+    return false;
+}
+$points = [[1,1],[2,3],[3,2]];
+echo isBoomerang($points) ? 'true' : 'false';
 
 
 // You are given an array points where points[i] = [xi, yi] is the coordinates of the ith point on a 2D plane. Multiple points can have the same coordinates.
 // You are also given an array queries where queries[j] = [xj, yj, rj] describes a circle centered at (xj, yj) with a radius of rj.
 // For each query queries[j], compute the number of points inside the jth circle. Points on the border of the circle are considered inside.
 // Return an array answer, where answer[j] is the answer to the jth query.
+
+
+
 
 
 

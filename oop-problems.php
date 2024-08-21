@@ -121,14 +121,46 @@ class Product implements Comparable
 }
 
 
-$product1 = new Product("Desktop", 1200);
-$product2 = new Product("Laptop", 1000);
+// $product1 = new Product("Desktop", 1200);
+// $product2 = new Product("Laptop", 1000);
 
-$result = $product1->compare($product2);
-if ($result < 0) {
-    echo $product1->name() . " is cheaper than " . $product2->name() . "</br>";
-} elseif ($result > 0) {
-    echo $product1->name() . " is more expensive than " . $product2->name() . "</br>";
-} else {
-    echo $product1->name() . " and " . $product2->name() . " have the same price.</br>";
-}
+// $result = $product1->compare($product2);
+// if ($result < 0) {
+//     echo $product1->name() . " is cheaper than " . $product2->name() . "</br>";
+// } elseif ($result > 0) {
+//     echo $product1->name() . " is more expensive than " . $product2->name() . "</br>";
+// } else {
+//     echo $product1->name() . " and " . $product2->name() . " have the same price.</br>";
+// }
+
+
+//Write a PHP class called 'File' with properties like 'name' and 'size'. Implement a static method to calculate the total size of multiple files.
+class File 
+{
+    public $name;
+    public $size;
+    public function __construct($name, $size) {
+        $this->name = $name;
+        $this->size = $size;
+    }
+    public static function size($files) {
+        $totalSize = 0;
+
+        foreach ($files as $file) {
+            if ($file instanceof File) {
+                $totalSize += $file->size;
+            }
+        }
+
+        return $totalSize;
+    }
+} 
+
+$file1 = new File("file1.txt", 1000);
+$file2 = new File("file2.txt", 2000);
+$file3 = new File("file3.txt", 1500);
+
+$files = [$file1, $file2, $file3];
+$totalSize = File::size($files);
+
+echo "Total size of files: " . $totalSize . " bytes";
