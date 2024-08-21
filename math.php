@@ -172,6 +172,22 @@ function isBoomerang($points) {
 $points = [[1,1],[2,3],[3,2]];
 //echo isBoomerang($points) ? 'true' : 'false';
 
+//Given an integer n, return any array containing n unique integers such that they add up to 0.
+function uniqueness($num) {
+    $result = [];
+    for ($i = 1; $i <= floor($num / 2); $i++) {
+        $result[] = $i;
+        $result[] = -$i;
+    }
+    if ($num % 2 != 0) {
+        $result[] = 0;
+    }
+sort($result);
+    return $result;
+}
+//print_r(uniqueness(7));
+
+
 //A range [a,b] is the set of all integers from a to b (inclusive).
 //Return the smallest sorted list of ranges that cover all the numbers
 //in the array exactly. That is, each element of nums is covered by exactly one of the ranges, and there is no integer 
@@ -202,7 +218,33 @@ function rangeDetect($array)
     return $allintList;
 }
 
-print_r(rangeDetect([1, 2, 3, 5]));
+//print_r(rangeDetect([1, 2, 3, 5]));
+
+/**There is a function signFunc(x) that returns:
+    1 if x is positive.
+    -1 if x is negative.
+    0 if x is equal to 0.
+You are given an integer array nums. Let product be the product of all values in the array nums.
+Return signFunc(product).*/
+function signFunc(array $x): int
+{
+    $multplicationResult = 1;
+    foreach($x as $num)
+    {
+        $multplicationResult *= $num;
+    }
+    if($multplicationResult > 0)
+    {
+        return 1;
+    }
+    elseif($multplicationResult < 0 )
+    {
+        return -1;
+    }else {
+        return 0;
+    }
+}
+print_r(signFunc([-1, 1, -1, 1, -1]));
 
 
 // You are given an array points where points[i] = [xi, yi] is the coordinates of the ith point on a 2D plane. Multiple points can have the same coordinates.

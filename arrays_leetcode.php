@@ -218,23 +218,23 @@ function frequency($nums)
 
 //string with unique characters::
 
-function stringUnique($string)
-{
-    $cleanedString = strtolower(preg_replace('/[^a-z]/', '', $string));
-    $chars = str_split($cleanedString);
-    $charCounts = array_occurences($chars);
-    //$charCounts = array_count_values($chars);
-    print_r($charCounts);
-    foreach ($charCounts as $freq) {
-        if ($freq > 1) {
-            echo 'there is a character repetition';
-            return;
-        }
-    }
-    echo 'There is no character repetition';
-    return true;
-}
-$string = 'str';
+// function stringUnique($string)
+// {
+//     $cleanedString = strtolower(preg_replace('/[^a-z]/', '', $string));
+//     $chars = str_split($cleanedString);
+//     $charCounts = array_occurences($chars);
+//     //$charCounts = array_count_values($chars);
+//     print_r($charCounts);
+//     foreach ($charCounts as $freq) {
+//         if ($freq > 1) {
+//             echo 'there is a character repetition';
+//             return;
+//         }
+//     }
+//     echo 'There is no character repetition';
+//     return true;
+// }
+// $string = 'str';
 //$result = stringUnique($string);
 //var_dump($result);
 
@@ -263,15 +263,19 @@ $items = [1, 2, 2, 3, 4, 5, 2];
 
 //given two string , write a mthod to find if one is permutation of the other.
 
-function permutationNum($number)
+function permutationNum($str1, $str2)
 {
-    $result = 1;
-    for ($i = $number; $i > 0; $i--) {
-        $result *= $i;
-    }
-    echo $result;
+    $string1 = str_replace(' ', '', $str1);
+    $string2 = str_replace(' ', '', $str2);
+    $sortedString1 = str_split($string1);
+    $sortedString2 = str_split($string2);
+    sort($sortedString1);
+    sort($sortedString2);
+    return implode('', $sortedString1) === implode('', $sortedString2);
 }
 
+$result = permutationNum('hello', 'holle ');
+var_dump($result);
 
 // Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers.
 //Then print the respective minimum and maximum values as a single line of two space-separated long integers. 
