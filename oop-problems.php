@@ -164,3 +164,25 @@ $files = [$file1, $file2, $file3];
 $totalSize = File::size($files);
 
 echo "Total size of files: " . $totalSize . " bytes";
+
+//write a mathod to replace all spaces in a string with '%20'.
+//example='mr john smith' => 'mr%20smith%20smith'
+
+class SpaceChange
+{
+    public $str;
+    public function __construct($str)
+    {
+        $this->str = $str;
+    }
+    public function spaceTochar()
+    {
+        $lastSp= trim($this->str);
+        $newString=  str_replace(' ','%20',$lastSp);
+        return $newString;
+        
+    }
+}
+
+$string = new SpaceChange(' mr john smith ');
+echo($string->spaceTochar());
