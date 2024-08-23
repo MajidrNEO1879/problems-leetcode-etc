@@ -246,6 +246,35 @@ function signFunc(array $x): int
 }
 print_r(signFunc([-1, 1, -1, 1, -1]));
 
+//Given a 0-indexed integer array nums, return the array if it can be made strictly increasing after removing exactly one element,
+//If the array is already strictly increasing, return the array.
+//The array nums is strictly increasing if nums[i - 1] < nums[i] for each index (1 <= i < nums.length).
+function arrayIncrease($arr)
+{
+    $count = count($arr);
+    $found = false; 
+    for ($i = 1; $i < $count; $i++) {
+        if ($arr[$i - 1] >= $arr[$i]) {
+            if ($found) {
+                return $arr;
+            }
+            $found = true;
+
+            if ($i > 1 && $arr[$i - 2] >= $arr[$i]) {
+                unset($arr[$i]);
+            } else {
+                unset($arr[$i - 1]);
+            }
+        }
+    }
+    return array_values($arr);
+}
+var_dump(arrayIncrease([1, 2, 10, 5, 7]));
+
+
+
+
+
 
 // You are given an array points where points[i] = [xi, yi] is the coordinates of the ith point on a 2D plane. Multiple points can have the same coordinates.
 // You are also given an array queries where queries[j] = [xj, yj, rj] describes a circle centered at (xj, yj) with a radius of rj.

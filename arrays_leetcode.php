@@ -275,7 +275,7 @@ function permutationNum($str1, $str2)
 }
 
 $result = permutationNum('hello', 'holle ');
-var_dump($result);
+//var_dump($result);
 
 // Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers.
 //Then print the respective minimum and maximum values as a single line of two space-separated long integers. 
@@ -320,15 +320,125 @@ function birthday($arr)
     }
     return $maxnumrep;
 }
-print_r(birthday([4,4,0,1,3]));
+//print_r(birthday([4,4,0,1,3]));
 
 
-// We define subsequence as any subset of an array. We define a subarray as a contiguous subsequence in an array.
+function permute($str, $i, $n, &$results) {  
+    if ($i == $n) {
+        $results[] = $str;  
+    } else {
+        for ($j = $i; $j < $n; $j++) {
+            swap($str, $i, $j);
+            permute($str, $i + 1, $n, $results);  
+            swap($str, $i, $j); 
+        }
+    }
+}
 
-// Given an array, find the maximum possible sum among:
+function swap(&$str, $i, $j) {
+    $temp = $str[$i];
+    $str[$i] = $str[$j];
+    $str[$j] = $temp;
+}
 
-//     all nonempty subarrays.
-//     all nonempty subsequences.
+function findPalindromes($results) {
+    foreach($results as $item) {   
+        if ($item == strrev($item)) {
+            echo "Palindrome: $item\n";
+        }
+    }
+}
 
-// Print the two values as space-separated integers on one line.
+// $str = "ract coa";
+// $results = []; 
+// permute($str, 0, strlen($str), $results);  // Generate permutations
 
+// // Output all permutations
+// echo "All permutations:\n";
+// print_r($results);
+
+// // Check and print palindromes
+// findPalindromes($results);
+
+
+//string compression => abbccdff = 1a2b2c2f
+
+function stringComp(string $string)
+{
+    $charNum = []; 
+    for ($i = 0; $i < strlen($string); $i++) {
+        $char = $string[$i];
+        
+        if (isset($charNum[$char])) {
+            $charNum[$char]++;
+        } else {
+            $charNum[$char] = 1;
+        }
+    }
+
+    return array_keys($charNum) . array_values($charNum);
+}
+
+//var_dump(stringComp('abss'));
+
+
+//Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. 
+//If target exists, then return its index. Otherwise, return -1.
+//You must write an algorithm with O(log n) runtime complexity.
+
+function bianarySearch($array,$target)
+{
+    for($i=0;$i<count($array);$i++)
+    {
+        if($array[$i]==$target)
+        {
+            return $i;
+        }
+    }
+    return -1;
+}
+//var_dump(bianarySearch([-1,0,3,5,9,12],2));
+
+function fib($n)
+{
+    
+    if($n<=0){
+        return 0;
+    }
+    elseif($n==1)
+    {
+        return 1;
+    }
+    return fib($n-1)+fib($n-2);
+}
+
+//var_dump(fib(7));
+
+//maxim
+function maximum($arr)
+{
+    $max=0;
+    for($i=0;$i<count($arr);$i++)
+    {
+        if($arr[$i]<$arr[$i+1])
+        {
+            $max = $arr[$i+1];
+        }
+    }
+    return $max;
+}
+//var_dump(max([1,2,4,8,0]));
+
+
+/**Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+You must implement a solution with a linear runtime complexity and use only constant extra space. */
+
+function singleItem($nums) {
+    $result = 0;
+    foreach ($nums as $num) {
+        $result ^= $num;
+    }
+    return $result;
+}
+var_dump(singleItem([4,2,1,2,1]));
