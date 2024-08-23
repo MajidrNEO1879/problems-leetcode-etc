@@ -441,4 +441,65 @@ function singleItem($nums) {
     }
     return $result;
 }
-var_dump(singleItem([4,2,1,2,1]));
+//var_dump(singleItem([4,2,1,2,1]));
+
+
+//Given an array of positive integers arr, find a pattern of length m that is repeated k or more times.
+//A pattern is a subarray (consecutive sub-sequence) that consists of one or more values, repeated multiple times consecutively without overlapping.
+//A pattern is defined by its length and the number of repetitions.
+//Return true if there exists a pattern of length m that is repeated k or more times, otherwise return false.
+
+/**You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+ *  The digits are ordered from most significant to least significant in left-to-right order. 
+ * The large integer does not contain any leading 0's.
+Increment the large integer by one and return the resulting array of digits.
+ */
+function largeInt(array $array):array
+{
+    $arrayLenght=count($array);
+    $x = $array[$arrayLenght-1]+1;
+    $array[$arrayLenght-1] = $x;
+    return $array;
+
+}
+//var_dump(largeInt([4,5,6]));
+
+
+function summaryRange($nums): array {
+    $startSequences = [];
+    $endSequences = [];
+    $fullArray = [];
+    foreach($nums as $num) {
+        if (!in_array($num - 1, $nums)) {
+            $startSequences[] = $num;
+        }
+        if (!in_array($num + 1, $nums)) {
+            $endSequences[] = $num;
+        }
+    }
+
+    for ($i = 0; $i < count($startSequences); $i++) {
+        if ($startSequences[$i] == $endSequences[$i]) {
+            $fullArray[] = (string)$startSequences[$i];
+        } else {
+            $fullArray[] = $startSequences[$i] . '->' . $endSequences[$i];
+        }
+    }
+
+    return $fullArray;
+}
+//var_dump(summaryRange([2, 3, 4, 6, 8, 9]));
+
+/**Given a 2D integer array nums where nums[i] is a non-empty array of distinct positive integers,
+ *  return the list of integers that are present in each array of nums sorted in ascending order.  */
+
+ function distinctArray(array $arr): array {
+    $arrLength = count($arr);
+    $commonElements = $arr[0];
+    for ($i = 1; $i < $arrLength; $i++) {
+        $commonElements = array_intersect($commonElements, $arr[$i]);
+    }
+    sort($commonElements);
+    return $commonElements;
+}
+var_dump(distinctArray([[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]));

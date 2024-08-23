@@ -76,4 +76,14 @@ function rowcolZero($matrix) {
 
     return $matrix;
 }
-rowcolZero([[1,2,3],[4,5,6],[7,8,9]]);
+$matrix = [
+    [1, 0, 3],
+    [4, 1, 6],
+    [7, 8, 9]
+];
+
+$result = rowcolZero($matrix);
+
+foreach ($result as $row) {
+    echo implode(", ", $row) . "\n";
+}
