@@ -502,4 +502,24 @@ function summaryRange($nums): array {
     sort($commonElements);
     return $commonElements;
 }
-var_dump(distinctArray([[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]));
+//var_dump(distinctArray([[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]]));
+
+
+//Given an array of integers arr[] of size N and an integer d, the task is to rotate the array elements to the left by d positions.
+
+function arrayRotation($arr, $d)
+{
+    $n = count($arr);
+    $rotatedArray = [];
+
+    $d = $d % $n;
+    for ($i = 0; $i < $n; $i++) {
+        $newIndex = ($i + $n - $d) % $n;
+        $rotatedArray[$newIndex] = $arr[$i];
+    }
+    for ($i = 0; $i < $n; $i++) {
+        $arr[$i] = $rotatedArray[$i];
+    }
+    return $arr;
+}
+var_dump(arrayRotation([1, 2, 3, 4, 5, 6, 7],2));

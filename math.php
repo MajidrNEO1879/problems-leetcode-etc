@@ -269,7 +269,7 @@ function arrayIncrease($arr)
     }
     return array_values($arr);
 }
-var_dump(arrayIncrease([1, 2, 10, 5, 7]));
+//var_dump(arrayIncrease([1, 2, 10, 5, 7]));
 
 
 
@@ -294,3 +294,60 @@ var_dump(arrayIncrease([1, 2, 10, 5, 7]));
 //     For each row i where r1 < i < r2, there are no security devices in the ith row.
 // Laser beams are independent, i.e., one beam does not interfere nor join with another.
 // Return the total number of laser beams in the ban
+
+
+/**An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
+Given an integer n, return true if n is an ugly number. */
+
+function primeFactors($n) {
+    $factors = [];
+
+    while ($n % 2 == 0) {
+        $factors[] = 2;
+        $n /= 2;
+    }
+    for ($i = 3; $i <= sqrt($n); $i += 2) {
+        while ($n % $i == 0) {
+            $factors[] = $i;
+            $n /= $i;
+        }
+    }
+    if ($n > 2) {
+        $factors[] = $n;
+    }
+
+    return $factors;
+}
+
+
+//print_r(primeFactors(315)); 
+
+
+
+
+//You are given two positive integers n and limit.
+//Return the total number of ways to distribute n candies among 3 children such that no child gets more than limit candies.
+
+// function dsac($n, $limit)
+// {
+
+// }
+
+/**Given 2 sorted arrays arr1[] and arr2[], each of size n, the task is to find the median of the array obtained after merging arr1[] and arr2[].*/
+
+function arraySorted($arr1,$arr2){
+    $mergesArrays = array_merge($arr1,$arr2);
+    sort($mergesArrays);
+    print_r($mergesArrays);
+    $arrayLenght=count($mergesArrays);
+    //print_r($arrayLenght);
+    if(count($mergesArrays)%2 != 0)
+    {
+        return $mergesArrays[floor($arrayLenght/2)];
+    }
+    else
+    {
+        return ($mergesArrays[(($arrayLenght/2)-1)]+$mergesArrays[$arrayLenght/2])/2;
+    }
+}
+var_dump(arraySorted([2, 3, 5, 8],[10, 12, 14, 16, 18, 20]));
