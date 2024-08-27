@@ -621,3 +621,19 @@ function zeroList($arr)
     return $arr;
 }
 //var_dump(zeroList([5,8,9,0,4,0,1,0]));
+
+//Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+//ideas:An element of the array can store water if there are higher bars on the left and the right. 
+
+
+
+
+
+//You are given an array of integers nums and an integer target.
+//Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element on it is less or equal to target. 
+//Since the answer may be too large, return it modulo 109 + 7.
+
+// function arrayTint(array $num, int $target)
+// {
+    
+// }

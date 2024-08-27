@@ -149,6 +149,23 @@ $result = $conversion->isStrictlyPalindromic();
 //echo $result ? "True" : "False";
 
 
+//fibinacci
+function Fibonacci($number){ 
+      if($number<=0)
+      {
+        return 0;
+      }
+      elseif($number == 1)
+      {
+        return 1;
+      }
+      else
+      {
+        return Fibonacci($number -1) + Fibonacci($number -2); 
+      }
+} 
+var_dump(Fibonacci(15));
+
 //Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.
 //A boomerang is a set of three points that are all distinct and not in a straight line.
 function isBoomerang($points) {
@@ -244,7 +261,7 @@ function signFunc(array $x): int
         return 0;
     }
 }
-print_r(signFunc([-1, 1, -1, 1, -1]));
+// print_r(signFunc([-1, 1, -1, 1, -1]));
 
 //Given a 0-indexed integer array nums, return the array if it can be made strictly increasing after removing exactly one element,
 //If the array is already strictly increasing, return the array.
@@ -350,4 +367,38 @@ function arraySorted($arr1,$arr2){
         return ($mergesArrays[(($arrayLenght/2)-1)]+$mergesArrays[$arrayLenght/2])/2;
     }
 }
-var_dump(arraySorted([2, 3, 5, 8],[10, 12, 14, 16, 18, 20]));
+// var_dump(arraySorted([2, 3, 5, 8],[10, 12, 14, 16, 18, 20]));
+
+
+// Given a non-negative integer c, decide whether there're two integers a and b such that a2 + b2 = c.
+function nonNegInt(int $c)
+{
+    $range = [];
+    for($i=0;$i<=floor($c);$i++)
+    {
+        $range[]=$i;
+    }
+    $pStart=0;
+    $pEnd=count($range)-1;
+    while($pStart <= $pEnd)
+    {
+        if(($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd])<$c)
+        {
+            $pStart +=1;
+        }
+        elseif(($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd]) > $c)
+        {
+            $pEnd -=1;
+        }
+        elseif(($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd])==$c)
+        {
+            return true;
+        }
+        
+    }
+    return false;
+}
+
+//var_dump(nonNegInt(16));
+
+
