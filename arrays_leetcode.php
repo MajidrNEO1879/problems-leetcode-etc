@@ -522,4 +522,102 @@ function arrayRotation($arr, $d)
     }
     return $arr;
 }
-var_dump(arrayRotation([1, 2, 3, 4, 5, 6, 7],2));
+//var_dump(arrayRotation([1, 2, 3, 4, 5, 6, 7],2));
+
+//Given an array (or string), the task is to reverse the array/string. 
+function reverseArray(&$arr, $start, $end) 
+{ 
+    while ($start < $end) 
+    { 
+        $temp = $arr[$start]; 
+        $arr[$start] = $arr[$end]; 
+        $arr[$end] = $temp; 
+        $start++; 
+        $end--; 
+    } 
+}     
+$arr = array(1, 2, 3, 4, 5, 6); 
+//var_dump(reverseArray($arr, 0, 5));
+
+
+
+// Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, 
+//find two numbers such that they add up to a specific target number. Let these two numbers
+//  be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
+// Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
+
+function addSum($arr,$target)
+{
+    $left=0;
+    $right=count($arr)-1;
+    while($left <= $right)
+    {
+        if($arr[$left] + $arr[$right] == $target)
+        {
+            return [$left+1 ,$right+1];
+        }
+        elseif($arr[$left]+$arr[$right]>$target)
+        {
+            $right -=1;
+        }
+        else{
+            $left +=1;
+        }
+    }
+    return false;
+}
+//var_dump(addSum([2,3,7,11,15,18],18));
+
+/**Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+Notice that the solution set must not contain duplicate triplets. */
+function threeSum($nums) {
+    $result = [];
+    sort($nums); 
+    for ($i = 0; $i < count($nums) - 2; $i++) {
+        if ($i > 0 && $nums[$i] == $nums[$i - 1]) continue;
+
+        $left = $i + 1;
+        $right = count($nums) - 1;
+
+        while ($left < $right) {
+            $sum = $nums[$i] + $nums[$left] + $nums[$right];
+
+            if ($sum == 0) {
+                $result[] = [$nums[$i], $nums[$left], $nums[$right]];
+                while ($left < $right && $nums[$left] == $nums[$left + 1]) $left++;
+                while ($left < $right && $nums[$right] == $nums[$right - 1]) $right--;
+
+                $left++;
+                $right--;
+            } elseif ($sum < 0) {
+                $left++; 
+            } else {
+                $right--; 
+            }
+        }
+    }
+
+    return $result;
+}
+
+var_dump(threeSum([-1, 0, 1, 2, -1, -4]));
+
+
+//Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+function zeroList($arr)
+{
+    $slow = 0;
+    for ($i = 0; $i < count($arr); $i++) {
+        if ($arr[$i] != 0) {
+            $arr[$slow] = $arr[$i];
+            $slow += 1;
+        }
+    }
+    
+    while ($slow < count($arr)) {
+        $arr[$slow] = 0;
+        $slow += 1;
+    }
+    return $arr;
+}
+//var_dump(zeroList([5,8,9,0,4,0,1,0]));
