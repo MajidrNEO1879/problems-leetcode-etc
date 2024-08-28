@@ -600,7 +600,7 @@ function threeSum($nums) {
     return $result;
 }
 
-var_dump(threeSum([-1, 0, 1, 2, -1, -4]));
+//var_dump(threeSum([-1, 0, 1, 2, -1, -4]));
 
 
 //Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
@@ -633,7 +633,19 @@ function zeroList($arr)
 //Return the number of non-empty subsequences of nums such that the sum of the minimum and maximum element on it is less or equal to target. 
 //Since the answer may be too large, return it modulo 109 + 7.
 
-// function arrayTint(array $num, int $target)
-// {
-    
-// }
+function arrayTint(array $num, int $target)
+{
+    $start = 0;
+    $end = count($num) -1;
+    while($start < $end)
+    {
+        if(max($num[$start])+min($num[$end]) > $target)
+        {
+            $start +=1;
+        }
+        else
+        {
+            return [$num[$start], $num[$end]];
+        }
+    }
+}
