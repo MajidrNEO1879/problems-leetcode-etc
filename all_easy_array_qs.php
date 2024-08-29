@@ -279,6 +279,30 @@ function increasing(array $nums)
  }
 //  var_dump(checkCondition([10,2,5,3]));
 
-//Design and implement a TwoSum class. It should support the following operations: add and find.
-// add - Add the number to an internal data structure.
-// find - Find if there exists any pair of numbers which sum is equal to the value.
+/**You are given a 2D 0-indexed integer array dimensions.
+For all indices i, 0 <= i < dimensions.length, dimensions[i][0] represents the length and dimensions[i][1] represents the width of the rectangle i.
+Return the area of the rectangle having the longest diagonal. If there are multiple rectangles with the longest diagonal,
+ return the area of the rectangle having the maximum area. */
+function triangleArea(array $arr)
+{
+    $maxDiagonal = 0;
+    $maxArea = 0;
+
+    foreach ($arr as $dimension) {
+        $length = $dimension[0];
+        $width = $dimension[1];
+        $diagonal = sqrt($length * $length + $width * $width);
+        $area = $length * $width;
+        if ($diagonal > $maxDiagonal) {
+            $maxDiagonal = $diagonal;
+            $maxArea = $area;
+        } elseif ($diagonal == $maxDiagonal) {
+            if ($area > $maxArea) {
+                $maxArea = $area;
+            }
+        }
+    }
+
+    return $maxArea;
+}
+var_dump(triangleArea([[9,3],[8,6]]));

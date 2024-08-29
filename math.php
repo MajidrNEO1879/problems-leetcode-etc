@@ -107,35 +107,33 @@ A string is palindromic if it reads the same forward and backward.*/
 class BaseConversionResults
 {
     public $number;
-    
+
     public function __construct($number)
     {
         $this->number = $number;
     }
-    
+
     private function convertToBase($n, $b)
     {
         $convertedNumber = '';
-        while ($n > 0)
-        {
+        while ($n > 0) {
             $remainder = $n % $b;
             $n = intdiv($n, $b);
             $convertedNumber = $remainder . $convertedNumber;
         }
         return $convertedNumber;
     }
-    
+
     private function isPalindrome($str)
     {
         return $str === strrev($str);
     }
     public function isStrictlyPalindromic()
     {
-        for ($b = 2; $b <= $this->number - 2; $b++)
-        {            $convertedNumber = $this->convertToBase($this->number, $b);
-            
-            if (!$this->isPalindrome($convertedNumber))
-            {
+        for ($b = 2; $b <= $this->number - 2; $b++) {
+            $convertedNumber = $this->convertToBase($this->number, $b);
+
+            if (!$this->isPalindrome($convertedNumber)) {
                 return false;
             }
         }
@@ -150,47 +148,47 @@ $result = $conversion->isStrictlyPalindromic();
 
 
 //fibinacci
-function Fibonacci($number){ 
-      if($number<=0)
-      {
+function Fibonacci($number)
+{
+    if ($number <= 0) {
         return 0;
-      }
-      elseif($number == 1)
-      {
+    } elseif ($number == 1) {
         return 1;
-      }
-      else
-      {
-        return Fibonacci($number -1) + Fibonacci($number -2); 
-      }
-} 
-var_dump(Fibonacci(15));
+    } else {
+        return Fibonacci($number - 1) + Fibonacci($number - 2);
+    }
+}
+// var_dump(Fibonacci(15));
 
 //Given an array points where points[i] = [xi, yi] represents a point on the X-Y plane, return true if these points are a boomerang.
 //A boomerang is a set of three points that are all distinct and not in a straight line.
-function isBoomerang($points) {
+function isBoomerang($points)
+{
     $coords = [];
-    
+
     foreach ($points as $point) {
         $coords[] = $point;
     }
-    
+
     if ($coords[0] == $coords[1] || $coords[0] == $coords[2] || $coords[1] == $coords[2]) {
         return false;
     }
 
-    if (($coords[1][0] - $coords[0][0]) * ($coords[2][1] - $coords[0][1]) != 
-        ($coords[2][0] - $coords[0][0]) * ($coords[1][1] - $coords[0][1])) {
+    if (
+        ($coords[1][0] - $coords[0][0]) * ($coords[2][1] - $coords[0][1]) !=
+        ($coords[2][0] - $coords[0][0]) * ($coords[1][1] - $coords[0][1])
+    ) {
         return true;
     }
 
     return false;
 }
-$points = [[1,1],[2,3],[3,2]];
+$points = [[1, 1], [2, 3], [3, 2]];
 //echo isBoomerang($points) ? 'true' : 'false';
 
 //Given an integer n, return any array containing n unique integers such that they add up to 0.
-function uniqueness($num) {
+function uniqueness($num)
+{
     $result = [];
     for ($i = 1; $i <= floor($num / 2); $i++) {
         $result[] = $i;
@@ -199,7 +197,7 @@ function uniqueness($num) {
     if ($num % 2 != 0) {
         $result[] = 0;
     }
-sort($result);
+    sort($result);
     return $result;
 }
 //print_r(uniqueness(7));
@@ -246,18 +244,14 @@ Return signFunc(product).*/
 function signFunc(array $x): int
 {
     $multplicationResult = 1;
-    foreach($x as $num)
-    {
+    foreach ($x as $num) {
         $multplicationResult *= $num;
     }
-    if($multplicationResult > 0)
-    {
+    if ($multplicationResult > 0) {
         return 1;
-    }
-    elseif($multplicationResult < 0 )
-    {
+    } elseif ($multplicationResult < 0) {
         return -1;
-    }else {
+    } else {
         return 0;
     }
 }
@@ -269,7 +263,7 @@ function signFunc(array $x): int
 function arrayIncrease($arr)
 {
     $count = count($arr);
-    $found = false; 
+    $found = false;
     for ($i = 1; $i < $count; $i++) {
         if ($arr[$i - 1] >= $arr[$i]) {
             if ($found) {
@@ -316,7 +310,8 @@ function arrayIncrease($arr)
 /**An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
 Given an integer n, return true if n is an ugly number. */
 
-function primeFactors($n) {
+function primeFactors($n)
+{
     $factors = [];
 
     while ($n % 2 == 0) {
@@ -352,19 +347,17 @@ function primeFactors($n) {
 
 /**Given 2 sorted arrays arr1[] and arr2[], each of size n, the task is to find the median of the array obtained after merging arr1[] and arr2[].*/
 
-function arraySorted($arr1,$arr2){
-    $mergesArrays = array_merge($arr1,$arr2);
+function arraySorted($arr1, $arr2)
+{
+    $mergesArrays = array_merge($arr1, $arr2);
     sort($mergesArrays);
     print_r($mergesArrays);
-    $arrayLenght=count($mergesArrays);
+    $arrayLenght = count($mergesArrays);
     //print_r($arrayLenght);
-    if(count($mergesArrays)%2 != 0)
-    {
-        return $mergesArrays[floor($arrayLenght/2)];
-    }
-    else
-    {
-        return ($mergesArrays[(($arrayLenght/2)-1)]+$mergesArrays[$arrayLenght/2])/2;
+    if (count($mergesArrays) % 2 != 0) {
+        return $mergesArrays[floor($arrayLenght / 2)];
+    } else {
+        return ($mergesArrays[(($arrayLenght / 2) - 1)] + $mergesArrays[$arrayLenght / 2]) / 2;
     }
 }
 // var_dump(arraySorted([2, 3, 5, 8],[10, 12, 14, 16, 18, 20]));
@@ -374,27 +367,20 @@ function arraySorted($arr1,$arr2){
 function nonNegInt(int $c)
 {
     $range = [];
-    for($i=0;$i<=floor($c);$i++)
-    {
-        $range[]=$i;
+    for ($i = 0; $i <= floor($c); $i++) {
+        $range[] = $i;
     }
-    $pStart=0;
-    $pEnd=count($range)-1;
-    while($pStart <= $pEnd)
-    {
-        if(($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd])<$c)
-        {
-            $pStart +=1;
-        }
-        elseif(($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd]) > $c)
-        {
-            $pEnd -=1;
-        }
-        elseif(($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd])==$c)
-        {
+    $pStart = 0;
+    $pEnd = count($range) - 1;
+    while ($pStart <= $pEnd) {
+        if (($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd]) < $c) {
+            $pStart += 1;
+        } elseif (($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd]) > $c) {
+            $pEnd -= 1;
+        } elseif (($range[$pStart] * $range[$pStart] + $range[$pEnd] * $range[$pEnd]) == $c) {
             return true;
         }
-        
+
     }
     return false;
 }
@@ -402,3 +388,158 @@ function nonNegInt(int $c)
 //var_dump(nonNegInt(16));
 
 
+// Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+// The overall run time complexity should be O(log (m+n)).
+
+//O(nlogn)
+function findMedianSA(array $nums1, array $nums2)
+{
+    $mergedArray = array_merge($nums1, $nums2);
+    sort($mergedArray);
+    $n = count($mergedArray);
+    if (count($mergedArray) % 2 != 0) {
+        return $mergedArray[floor($n / 2)];
+    } else {
+        return ($mergedArray[$n / 2 - 1] + $mergedArray[$n / 2]) / 2;
+    }
+}
+// var_dump(findMedianSA([1,2],[3,4]));
+
+//to write it in O(log(n+m)) 
+function findMedianSAB(array $nums1, array $nums2)
+{
+    $m = count($nums1);
+    $n = count($nums2);
+
+    // Ensure nums1 is the smaller array
+    if ($m > $n) {
+        return findMedianSAB($nums2, $nums1);
+    }
+
+    $low = 0;
+    $high = $m;
+
+    while ($low <= $high) {
+        $partition1 = (int) (($low + $high) / 2);
+        $partition2 = (int) (($m + $n + 1) / 2) - $partition1;
+
+        $maxLeft1 = ($partition1 == 0) ? PHP_INT_MIN : $nums1[$partition1 - 1];
+        $minRight1 = ($partition1 == $m) ? PHP_INT_MAX : $nums1[$partition1];
+
+        $maxLeft2 = ($partition2 == 0) ? PHP_INT_MIN : $nums2[$partition2 - 1];
+        $minRight2 = ($partition2 == $n) ? PHP_INT_MAX : $nums2[$partition2];
+
+        if ($maxLeft1 <= $minRight2 && $maxLeft2 <= $minRight1) {
+            if (($m + $n) % 2 == 0) {
+                return (max($maxLeft1, $maxLeft2) + min($minRight1, $minRight2)) / 2;
+            } else {
+                return max($maxLeft1, $maxLeft2);
+            }
+        } elseif ($maxLeft1 > $minRight2) {
+            $high = $partition1 - 1;
+        } else {
+            $low = $partition1 + 1;
+        }
+    }
+
+    throw new Exception("Input arrays are not sorted or contain invalid data.");
+}
+
+// Test cases
+// var_dump(findMedianSAB([1, 3], [2])); 
+
+//bianary search
+function binarySearch($arr, $low, $high, $x)
+{
+    if ($high >= $low) {
+        $mid = ceil($low + ($high - $low) / 2);
+
+        // If the element is present 
+        // at the middle itself
+        if ($arr[$mid] == $x)
+            return floor($mid);
+
+        // If element is smaller than 
+        // mid, then it can only be 
+        // present in left subarray
+        if ($arr[$mid] > $x)
+            return binarySearch(
+                $arr,
+                $low,
+                $mid - 1,
+                $x
+            );
+
+        // Else the element can only 
+        // be present in right subarray
+        return binarySearch(
+            $arr,
+            $mid + 1,
+            $high,
+            $x
+        );
+    }
+
+    return -1;
+}
+
+// Driver Code
+$arr = array(2, 3, 4, 10, 40);
+$n = count($arr);
+$x = 10;
+// $result = binarySearch($arr, 0, $n - 1, $x);
+// if (($result == -1))
+//     echo "Element is not present in array";
+// else
+//     echo "Element is present at index ",
+//         $result;
+
+/**Given an array of both positive and negative integers, the task is to compute sum of minimum and maximum elements of all sub-array of size k.*/
+
+function printSubarrays(array $arr, $k) {
+    $n = count($arr);
+    
+    if ($k > $n) {
+        echo "Subarray size k is greater than the length of the array.\n";
+        return;
+    }
+
+    // Iterate over each possible starting index for subarrays of size k
+    for ($i = 0; $i <= $n - $k; $i++) {
+        // Extract the subarray of size k starting at index i
+        $subarray = array_slice($arr, $i, $k);
+        
+        // Print the subarray
+        echo "[" . implode(", ", $subarray) . "]\n";
+    }
+}
+printSubarrays([1, 2, 3, 4, 5], 3);  
+
+//sliding window technique:
+function printSubarraysSlidingWindow(array $arr, $k) {
+    $n = count($arr);
+
+    // Check if k is valid
+    if ($k > $n || $k <= 0) {
+        echo "Invalid subarray size k.\n";
+        return;
+    }
+
+    // Initialize the start and end of the window
+    $start = 0;
+    $end = $k - 1;
+
+    // Iterate and print each subarray
+    while ($end < $n) {
+        // Extract the subarray of size k
+        $subarray = array_slice($arr, $start, $k);
+
+        // Print the subarray
+        echo "[" . implode(", ", $subarray) . "]\n";
+
+        // Slide the window
+        $start++;
+        $end++;
+    }
+}
+// printSubarraysSlidingWindow([2, 4, 5, 7, 9], 3);
