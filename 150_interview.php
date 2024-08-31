@@ -25,4 +25,9 @@ function merge(array $nums1, int $m, array $nums2, int $n)
 var_dump(merge([1,2,3,0,0,0],3,[2,5,6],3));
 var_dump(merge([0],0,[1],1));
 
-//
+//iven an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be
+// changed. Then return the number of elements in nums which are not equal to val.
+// Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+// Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are
+// not important as well as the size of nums.
+// Return k.
