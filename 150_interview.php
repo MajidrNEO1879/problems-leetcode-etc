@@ -1,4 +1,5 @@
 <?php
+//Array / String
 
 /**You are given two integer arrays nums1 and nums2, sorted in non-decreasing order,
  *  and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
@@ -66,7 +67,7 @@ function removeDup(array $nums)
 /**Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice.
  *  The relative order of the elements should be kept the same. Return k after placing the final result in the first k slots of nums.
  Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.*/
-
+//99999
 function remDuplicate2(array &$nums)
 {
     $n = count($nums);
@@ -85,5 +86,53 @@ function remDuplicate2(array &$nums)
 }
 $nums = [1, 1, 1, 2, 2, 3];
 $k = remDuplicate2($nums);
-var_dump($k);
-var_dump(array_slice($nums, 0, $k));
+// var_dump($k);
+// var_dump(array_slice($nums, 0, $k));
+
+/**Given an array nums of size n, return the majority element.
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array. */
+
+function majoEl(array $nums)
+{
+    return 1;
+}
+
+// var_dump(majoEl([3,2,3]));
+
+/**Given an integer array nums, rotate the array to the right by k steps, where k is non-negative. */
+
+// function rotateArrray(array $nums, int $rotate)
+// {
+//     for($i=0;$i<count($nums);$i++)
+//     {
+
+//     }
+// }
+
+/**You are given an array prices where prices[i] is the price of a given stock on the ith day.
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+ */
+function maxprofit($nums)
+{
+    if (empty($prices)) {
+        return 0;
+    }
+
+    $minPrice = $prices[0];
+    $maxProfit = 0;
+
+    foreach ($prices as $price) {
+        
+        if ($price < $minPrice) {
+            $minPrice = $price;
+        }
+        $profit = $price - $minPrice;
+        if ($profit > $maxProfit) {
+            $maxProfit = $profit;
+        }
+    }
+
+    return $maxProfit;
+}
+var_dump(maxprofit([8, 1, 6, 4, 7, 3]));
