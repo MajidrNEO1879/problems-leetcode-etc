@@ -10,18 +10,14 @@ and the last n elements are set to 0 and should be ignored. nums2 has a length o
 
 function merge(array $nums1, int $m, array $nums2, int $n)
 {
-    $newNum1 = [];
-    for ($i = 0; $i < $m; $i++) {
-        $newNum1[] = $nums1[$i];
-    }
-    for ($j = 0; $j < $n; $j++) {
-        $newNum1[] = $nums2[$j];
-    }
-    sort($newNum1);
-    return $newNum1;
+    $nums2 = array_splice($nums2, 0, $n);
+    $nums1 = array_splice($nums1, 0, $m);
+    $nums1 = array_merge($nums1, $nums2);
+    sort($nums1);
+    return $nums1;
 }
 
-// var_dump(merge([1,2,3,0,0,0],3,[2,5,6],3));
+//var_dump(merge([1,2,3,0,0,0],3,[2,5,6],3));
 // var_dump(merge([0],0,[1],1));
 
 //given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be
@@ -101,13 +97,15 @@ function majoEl(array $nums)
 
 /**Given an integer array nums, rotate the array to the right by k steps, where k is non-negative. */
 
-// function rotateArrray(array $nums, int $rotate)
-// {
-//     for($i=0;$i<count($nums);$i++)
-//     {
+function rotateArray(&$nums, $k) {
+    $n = count($nums);
+    $k = $k % $n; 
 
-//     }
-// }
+    if ($k === 0) return; 
+
+   
+    $nums = array_merge(array_slice($nums, $n - $k), array_slice($nums, 0, $n - $k));
+}
 
 /**You are given an array prices where prices[i] is the price of a given stock on the ith day.
 You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
@@ -123,7 +121,7 @@ function maxprofit($nums)
     $maxProfit = 0;
 
     foreach ($prices as $price) {
-        
+
         if ($price < $minPrice) {
             $minPrice = $price;
         }
@@ -135,4 +133,24 @@ function maxprofit($nums)
 
     return $maxProfit;
 }
-var_dump(maxprofit([8, 1, 6, 4, 7, 3]));
+// var_dump(maxprofit([8, 1, 6, 4, 7, 3]));
+
+//Given a string s consisting of words and spaces, return the length of the last word in the string.
+// A word is a maximal substring consisting of non-space characters only.
+
+function lengthOfLastWord(string $s)
+{
+    $value = trim($s);
+    $sentence = explode(' ', $value);
+    return strlen(end($sentence));
+}
+var_dump(lengthOfLastWord('   fly me   to   the moon  '));
+
+/**Write a function to find the longest common prefix string amongst an array of strings.
+If there is no common prefix, return an empty string "".
+ */
+
+ function longestCommonPrefix($prefix)
+ {
+    
+ }
