@@ -513,7 +513,7 @@ function printSubarrays(array $arr, $k) {
         echo "[" . implode(", ", $subarray) . "]\n";
     }
 }
-printSubarrays([1, 2, 3, 4, 5], 3);  
+// printSubarrays([1, 2, 3, 4, 5], 3);  
 
 //sliding window technique:
 function printSubarraysSlidingWindow(array $arr, $k) {
@@ -543,3 +543,17 @@ function printSubarraysSlidingWindow(array $arr, $k) {
     }
 }
 // printSubarraysSlidingWindow([2, 4, 5, 7, 9], 3);
+
+//Given an integer n, return the number of trailing zeroes in n!.
+// Note that n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1.
+
+function trailingZeroes($n) {
+    $zeros = 0;
+    while ($n >= 5) {
+        $n = intdiv($n, 5);  
+        $zeros += $n;       
+    }
+    return $zeros;
+}
+
+var_dump(trailingZeroes(5));  
