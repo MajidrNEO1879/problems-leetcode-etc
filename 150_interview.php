@@ -144,13 +144,67 @@ function lengthOfLastWord(string $s)
     $sentence = explode(' ', $value);
     return strlen(end($sentence));
 }
-var_dump(lengthOfLastWord('   fly me   to   the moon  '));
+// var_dump(lengthOfLastWord('   fly me   to   the moon  '));
 
 /**Write a function to find the longest common prefix string amongst an array of strings.
 If there is no common prefix, return an empty string "".
  */
 
- function longestCommonPrefix($prefix)
- {
+//  function longestCommonPrefix($prefix)
+//  {
     
- }
+//  }
+
+ /**Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+You must write an algorithm that runs in O(n) time and without using the division operation. */
+
+function productExceptSelf($nums)
+{
+    $n = count($nums);
+    $answer = array_fill(0, $n, 1);
+   
+    $leftProduct = 1;
+    for ($i = 0; $i < $n; $i++) {
+        $answer[$i] = $leftProduct;
+        $leftProduct *= $nums[$i];
+    }
+    $rightProduct = 1;
+    for ($i = $n - 1; $i >= 0; $i--) {
+        $answer[$i] *= $rightProduct;
+        $rightProduct *= $nums[$i];
+    }
+    return $answer;
+}
+$array = [1, 2, 3, 4];
+// var_dump(productExceptSelf($array));
+
+
+
+
+function wordmetge($word1, $word2)
+{
+    $p1 = 0;
+    $p2 = 0;
+    $newWord = '';
+    
+    while ($p1 < strlen($word1) && $p2 < strlen($word2)) {
+        $newWord .= $word1[$p1];
+        $newWord .= $word2[$p2];
+        $p1++;
+        $p2++;
+    }
+
+    while ($p1 < strlen($word1)) {
+        $newWord .= $word1[$p1];
+        $p1++;
+    }
+// If word2 is longer, append the remaining characters
+    while ($p2 < strlen($word2)) {
+        $newWord .= $word2[$p2];
+        $p2++;
+    }
+
+    return $newWord;
+}
+var_dump(wordmetge('absty', 'pqr'));

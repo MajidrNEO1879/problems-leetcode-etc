@@ -55,8 +55,6 @@ const catName = async()=>
 
 
 // Read the cats api and find the average weight of cat in metric unit.
-// Read the countries api and find out the 10 largest countries
-// Read the countries api and count total number of languages in the world used as officials.
 
 const catData =async (link)=>
 {
@@ -77,4 +75,43 @@ const catData =async (link)=>
     }
 }
 const link = 'https://api.thecatapi.com/v1/breeds';
-catData(link).then(data=>console.log(data));
+// catData(link).then(data=>console.log(data));
+
+// Read the countries api and find out the 10 largest countries
+const countriesApiLargest = async(link)=>
+{
+    try{
+    const response = await fetch(link);
+    const responseJson = await response.json();
+    const population = [];
+    responseJson.map(data=>{
+        population.push(data.population);
+    });
+    population.sort((a, b) => b - a);
+    return population.slice(0,10);
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+}
+// countriesApiLargest(countriesAPI).then(data=>console.log(data));
+
+// Read the countries api and count total number of languages in the world used as officials.
+const countriesApiLanguages = async(link)=>
+    {
+        try{
+        const response = await fetch(link);
+        const responseJson = await response.json();
+        const lan =[];
+        responseJson.map(item=>{
+           lan.push(item.languages);
+        });
+return lan;
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+    }
+countriesApiLanguages(countriesAPI).then(data=>console.log(data));
