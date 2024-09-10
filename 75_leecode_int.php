@@ -33,8 +33,7 @@ function mergeAlternately($word1, $word2)
 Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2. */
 function gcdOfStrings($str1, $str2)
 {
-    if($str1 . $str2 != $str2 . $str1)
-    {
+    if ($str1 . $str2 != $str2 . $str1) {
         return false;
     }
     $gcdLength = gcd(strlen($str1), strlen($str2));
@@ -59,18 +58,13 @@ Note that multiple kids can have the greatest number of candies. */
 
 function kidCandy($candies, $extraCandy)
 {
-    $candyBool= [];
-    for($i=0;$i<count($candies);$i++)
-    {
-        for($j=0;$j<count($candies);$j++)
-        {
-            if($candies[$i]+$extraCandy>$candies[$j])
-            {
-                $candyBool[]= true;
-            }
-            else 
-            {
-                $candyBool[]=false;
+    $candyBool = [];
+    for ($i = 0; $i < count($candies); $i++) {
+        for ($j = 0; $j < count($candies); $j++) {
+            if ($candies[$i] + $extraCandy > $candies[$j]) {
+                $candyBool[] = true;
+            } else {
+                $candyBool[] = false;
             }
         }
     }
@@ -84,8 +78,7 @@ flowers can be planted in the flowerbed without violating the no-adjacent-flower
 
 function canPlaceFlowers($flowerbed, $n)
 {
-    if (count($flowerbed)<5)
-    {
+    if (count($flowerbed) < 5) {
         return false;
     }
 
@@ -100,22 +93,20 @@ function vowels($s)
     $vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
     $p1 = 0;
     $p2 = strlen($s) - 1;
-    $s = str_split($s); 
-    while($p1<$p2)
-    {
-        if(in_array($s[$p1], $vowels) && in_array($s[$p2], $vowels))
-        {
-            $temp=$s[$p1];
+    $s = str_split($s);
+    while ($p1 < $p2) {
+        if (in_array($s[$p1], $vowels) && in_array($s[$p2], $vowels)) {
+            $temp = $s[$p1];
             $s[$p1] = $s[$p2];
-            $s[$p2]=$temp;
-            $p1 ++;
-            $p2 --;
-        }elseif (!in_array($s[$p1], $vowels)) {
+            $s[$p2] = $temp;
+            $p1++;
+            $p2--;
+        } elseif (!in_array($s[$p1], $vowels)) {
             $p1++;
         } elseif (!in_array($s[$p2], $vowels)) {
             $p2--;
         }
-    }   
+    }
     return implode('', $s);
 }
 $s = 'hello world!';
@@ -126,15 +117,240 @@ $s = 'hello world!';
 function reverseWord($s)
 {
     $sentence = preg_replace('/\s+/S', " ", $s);
-    $sentence = explode(' ',$sentence);
+    $sentence = explode(' ', $sentence);
     $x = array_reverse($sentence);
     $y = '';
-    foreach($x as $item)
-    {
+    foreach ($x as $item) {
         $y .= $item . ' ';
     }
     return trim($y);
 }
 
-var_dump(reverseWord('a good   example'));
+//var_dump(reverseWord('a good   example'));
 
+/**Given an integer array nums, return true if there exists a triple of indices (i, j, k) 
+ * such that i < j < k and nums[i] < nums[j] < nums[k]. If no such indices exists, return false. */
+
+//better to use sliding window?
+function incearingTriples($nums)
+{
+    $n = count($nums);
+
+    if ($n < 3) {
+        return false;
+    }
+
+    // Traverse through the array, maintaining the minimum element so far
+    $min = PHP_INT_MAX;
+    $mid = PHP_INT_MAX;
+
+    foreach ($nums as $num) {
+        if ($num <= $min) {
+            // Update min if current number is smaller than min
+            $min = $num;
+            echo 'mean is' . $min . PHP_EOL;
+        } elseif ($num <= $mid) {
+            // Update mid if current number is between min and mid
+            $mid = $num;
+            echo 'mid is' . $mid;
+        } else {
+            // If we find a number greater than both min and mid, return true
+            return true;
+        }
+    }
+}
+//using sliding window is actually more efficient:
+function increasingTriplet($nums)
+{
+    $n = count($nums);
+
+    if ($n < 3) {
+        return false;
+    }
+
+    // Initialize left window to track the smallest value so far
+    $leftMin = array_fill(0, $n, 0);
+    $leftMin[0] = $nums[0];
+
+    // Initialize right window to track the largest value so far
+    $rightMax = array_fill(0, $n, 0);
+    $rightMax[$n - 1] = $nums[$n - 1];
+
+    // Fill leftMin array where leftMin[i] is the smallest value from nums[0] to nums[i]
+    for ($i = 1; $i < $n; $i++) {
+        $leftMin[$i] = min($leftMin[$i - 1], $nums[$i]);
+    }
+
+    // Fill rightMax array where rightMax[i] is the largest value from nums[i] to nums[n-1]
+    for ($i = $n - 2; $i >= 0; $i--) {
+        $rightMax[$i] = max($rightMax[$i + 1], $nums[$i]);
+    }
+
+    // Check if there exists a j such that leftMin[i] < nums[j] < rightMax[j]
+    for ($j = 1; $j < $n - 1; $j++) {
+        if ($leftMin[$j - 1] < $nums[$j] && $nums[$j] < $rightMax[$j + 1]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Example usage:
+$nums = [1, 2, 3, 4, 5];
+// var_dump(increasingTriplet($nums)); // Output: true
+
+// $nums = [5, 4, 3, 2, 1];
+// var_dump(increasingTriplet($nums)); // Output: false
+
+//  var_dump(incearingTriples([1,2,3,4,5]));
+
+
+
+//two pointers
+
+/**Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+Note that you must do this in-place without making a copy of the array. */
+
+function moveZeros(&$nums)
+{
+    for ($i = 0; $i < count($nums); $i++) {
+        if ($nums[$i] === 0) {
+            unset($nums[$i]);
+            array_push($nums, 0);
+        }
+    }
+    return array_values($nums);
+    /** $n = count($nums);
+    $nonZeroIdx = 0; // This pointer keeps track of where the next non-zero element should go
+
+    // Move all non-zero elements to the front
+    for ($i = 0; $i < $n; $i++) {
+        if ($nums[$i] != 0) {
+            $nums[$nonZeroIdx] = $nums[$i];
+            $nonZeroIdx++;
+        }
+    }
+
+    // Fill the remaining part of the array with zeros
+    for ($i = $nonZeroIdx; $i < $n; $i++) {
+        $nums[$i] = 0;
+    } */
+}
+$a = [0, 1, 0, 3, 12];
+// var_dump(moveZeros($a));
+
+//Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+function isSubsequence($s, $t)
+{
+    $p1 = 0;
+    $p2 = 0;
+    while ($p1 < strlen($s) && $p2 < strlen($t)) {
+        if ($t[$p2] == $s[$p1]) {
+            $p1++;
+        }
+        $p2++;
+    }
+    return $p1 == strlen($s);
+}
+$s = "abc";
+$t = "ahbgdc";
+//var_dump(isSubsequence($s, $t));
+
+/**You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+Return the maximum amount of water a container can store. */
+
+
+function maxWater($height)
+{
+    // $p1 = 0;
+// $p2 = count($height)-1;
+// $areas = [];
+// while($p1<$p2)
+// {
+//     $h = min($height[$p1], $height[$p2]);
+//     $l = abs($height[$p2]-$height[$p1]);
+//     $areas[]= $h * $l;
+//     $p1 ++;
+//     $p2 --;
+// }
+// return $areas;
+    $result = 0;
+    $p1 = 0;
+    $p2 = count($height) - 1;
+    while ($p1 < $p2) {
+        $area = ($p2 - $p1) * min($height[$p1], $height[$p2]);
+        $result = max($result, $area);
+        if ($height[$p1] < $height[$p2]) {
+            $p1++;
+        } elseif ($height[$p1] > $height[$p2]) {
+            $p2--;
+        } else {
+            $p1++;
+        }
+    }
+    return $result;
+
+}
+// var_dump(maxWater([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+
+
+/***You are given an integer array nums and an integer k.
+In one operation, you can pick two numbers from the array whose sum equals k and remove them from the array.
+Return the maximum number of operations you can perform on the array. */
+
+function maxOp(&$nums, $k)
+{
+    $pairs = 0;
+    for($i=0;$i<count($nums);$i++)
+    {
+        for($j=$i+1;$j<count($nums);$j++)
+        {
+            echo 'i is ' . $i . PHP_EOL;
+            if($nums[$i]+$nums[$j]===$k)
+            {
+                unset($nums[$i]);
+                unset($nums[$j]);
+                $nums = array_values($nums);
+                $pairs +=1; 
+            }
+            else
+            {
+                echo $nums[$i] . ' and ' . $nums[$j] . PHP_EOL;
+            }
+        }
+    }
+    return $pairs;
+}
+$a = [1,2,3,4];
+// var_dump(maxOp($a, 5));
+
+//sliding window
+
+/**You are given an integer array nums consisting of n elements, and an integer k.
+Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will 
+be accepted. */
+
+function findMaxAv($nums, $k)
+{
+    $n = count($nums);
+    $currentSum = array_sum(array_slice($nums, 0, $k));
+    $maxSum = $currentSum;
+
+    // Slide the window across the array
+    for ($i = $k; $i < $n; $i++) {
+        // Update the current sum by sliding the window
+        $currentSum += $nums[$i] - $nums[$i - $k];
+        // Update the maximum sum if needed
+        if ($currentSum > $maxSum) {
+            $maxSum = $currentSum;
+        }
+    }
+
+    // Return the maximum average
+    return $maxSum / $k;
+}   
+
+// var_dump(findMaxAv([1,12,-5,-6,50,3],4));
