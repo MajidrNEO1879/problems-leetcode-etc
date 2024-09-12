@@ -354,3 +354,91 @@ function findMaxAv($nums, $k)
 }   
 
 // var_dump(findMaxAv([1,12,-5,-6,50,3],4));
+
+/**Given a string s and an integer k, return the maximum number of vowel letters in any substring of s with length k.
+Vowel letters in English are 'a', 'e', 'i', 'o', and 'u'. */
+
+function maxVowels($s, $k)
+{
+    $vowels = ['a', 'e', 'i', 'o', 'u'];
+    $maxVowelCount = 0;
+    $currentVowelCount = 0;
+    $maxVowelCount = $currentVowelCount;
+    
+    // Now slide the window from left to right
+    for ($i = $k; $i < strlen($s); $i++) {
+        // Slide the window to the right: remove the leftmost element and add the new rightmost element
+        if (in_array($s[$i - $k], $vowels)) {
+            $currentVowelCount--;
+        }
+        
+        if (in_array($s[$i], $vowels)) {
+            $currentVowelCount++;
+        }
+        
+        // Update the maximum vowel count
+        $maxVowelCount = max($maxVowelCount, $currentVowelCount);
+    }
+    
+    return $maxVowelCount;
+}
+
+
+/**Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0 */
+function longestOnes($nums, $k)
+{
+    $left = 0;
+    $zeros = 0;
+    $maxOnes = 0;
+
+    for ($right = 0; $right < count($nums); $right++) {
+        // If we encounter a zero, increment the zero count
+        if ($nums[$right] == 0) {
+            $zeros++;
+        }
+
+        // If zero count exceeds k, shrink the window from the left
+        while ($zeros > $k) {
+            if ($nums[$left] == 0) {
+                $zeros--;
+            }
+            $left++;
+        }
+
+        // Update the max length of consecutive ones
+        $maxOnes = max($maxOnes, $right - $left + 1);
+    }
+
+    return $maxOnes;
+}
+var_dump(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2));
+
+
+
+
+//Prefix Sum
+/**There is a biker going on a road trip. The road trip consists of n + 1 points at different altitudes. The biker starts his trip on point 0 with altitude equal 0.
+You are given an integer array gain of length n where gain[i] is the net gain in altitude between points i​​​​​​ and i + 1 for all (0 <= i < n). Return the highest altitude of a
+ point. */
+
+ function largestAlt($gain)
+ {
+    $result = [0];
+    for($i=0;$i<count($gain);$i++)
+    {
+        $result[] = $result[$i] + $gain[$i];
+    }
+    return max($result);
+ }
+
+//  var_dump(largestAlt([-5,1,5,0,-7]));
+
+/**Given an array of integers nums, calculate the pivot index of this array.
+The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
+If the index is on the left edge of the array, then the left sum is 0 because there are no elements to the left. This also applies to the right edge of the array.
+Return the leftmost pivot index. If no such index exists, return -1. */
+function pivotIndex($nums)
+{
+    
+}
+// var_dump(pivotIndex($nums));

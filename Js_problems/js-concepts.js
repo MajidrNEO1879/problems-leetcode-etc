@@ -114,4 +114,4 @@ return lan;
             console.log(err);
         }
     }
-countriesApiLanguages(countriesAPI).then(data=>console.log(data));
+// countriesApiLanguages(countriesAPI).then(data=>console.log(data));
