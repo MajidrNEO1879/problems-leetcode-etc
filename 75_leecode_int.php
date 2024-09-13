@@ -411,7 +411,7 @@ function longestOnes($nums, $k)
 
     return $maxOnes;
 }
-var_dump(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2));
+// var_dump(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2));
 
 
 
@@ -442,3 +442,37 @@ function pivotIndex($nums)
     
 }
 // var_dump(pivotIndex($nums));
+
+
+
+
+//Hash Map / Set
+
+/**Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where:
+    answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
+    answer[1] is a list of all distinct integers in nums2 which are not present in nums1.
+Note that the integers in the lists may be returned in any order. */
+
+function findDif(&$nums1, &$nums2)
+{
+    $set1 = array_flip($nums1);  
+    $set2 = array_flip($nums2);  
+
+    $diff1 = [];
+    foreach ($set1 as $num => $val) {
+        if (!isset($set2[$num])) {
+            $diff1[] = $num;
+        }
+    }
+
+    $diff2 = [];
+    foreach ($set2 as $num => $val) {
+        if (!isset($set1[$num])) {
+            $diff2[] = $num;
+        }
+    }
+    return [$diff1, $diff2];
+}
+$nums1= [1,2,3];
+$nums2 = [2, 4, 6];
+var_dump(findDif($nums1, $nums2));
