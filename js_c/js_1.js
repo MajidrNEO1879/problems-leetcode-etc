@@ -25,6 +25,7 @@ const removeEl=(nums, val)=>
 
 /**Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. 
  * The relative order of the elements should be kept the same. Then return the number of unique elements in nums. */
+// --
 function removeDuplicates(arr) {
   
     let i = 0; 
@@ -43,3 +44,5 @@ function removeDuplicates(arr) {
     return arr;
   }
 //console.log(removeDuplicates([1,1,3,4,5,6]));
+//--
+
