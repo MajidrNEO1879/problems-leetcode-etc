@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <set>
+using namespace std;
 //merging
 int main_1()
 {
@@ -21,8 +23,24 @@ int main_1()
         std::cout << z[i];
     }
 }
+
+//removing duplicates 
+vector<int> removeDup(const vector<int>& arr1)
+{
+    set <int> uniqItems (arr1.begin(), arr1.end());
+    vector<int> result (uniqItems.begin(), uniqItems.end());
+    return result;
+}
 int main ()
 {
-    std::cout << main_1();
+    // cout << main_1();
+    vector <int> arr1 = {1,2,3,4,5,5,6};
+    vector <int> result = removeDup(arr1);
+    for (int num : result)
+    {
+        cout << num;
+    }
+    cout << endl;
     return 0;
+
 }
