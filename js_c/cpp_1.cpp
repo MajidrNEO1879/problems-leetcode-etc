@@ -60,6 +60,19 @@ vector<pair<int, int>> countFrequency(const vector<int> &arr)
 
     return freq; // Return the vector of pairs containing frequencies
 }
+
+//two sum
+
+void  twoSum(vector <int> arr, int target)
+{
+    for (int i = 0; i<arr.size(); i++)
+    {
+        if (arr[i] + arr[i+1] == target)
+        {
+            cout << arr[i] << " " << arr[i+1]<< endl;
+        }
+    }
+}
 int main()
 {
     // cout << main_1();
@@ -71,11 +84,12 @@ int main()
     // }
     // cout << endl;
     vector<int> arr = {1, 2, 3, 2, 4, 1, 5, 1};
-    vector<pair<int, int>> result = countFrequency(arr);
-    cout << "Element frequencies:" << endl;
-    for (const auto &p : result)
-    {
-        cout << "Element: " << p.first << ", Frequency: " << p.second << endl;
-    }
+    // vector<pair<int, int>> result = countFrequency(arr);
+    // cout << "Element frequencies:" << endl;
+    // for (const auto &p : result)
+    // {
+    //     cout << "Element: " << p.first << ", Frequency: " << p.second << endl;
+    // }
+    twoSum(arr1, 5);
     return 0;
 }
