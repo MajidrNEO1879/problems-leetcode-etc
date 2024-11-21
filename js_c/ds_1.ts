@@ -45,27 +45,46 @@ function duplicates(array: number[]): number[] {
 // console.log(duplicates([1, 6, 5, 2, 3, 3, 2]));
 
 //Given an array arr[] of n integers, construct a Product Array prod[] (of the same size) such that prod[i] is equal to the product of all the elements of arr[] except arr[i].
+//needs reading
 function productResult(array: number[]): number[] {
-    const n = array.length;
-    const left = new Array(n).fill(1);
-    const right = new Array(n).fill(1);
-    const prod = new Array(n).fill(1);
+  const n = array.length;
+  const left = new Array(n).fill(1);
+  const right = new Array(n).fill(1);
+  const prod = new Array(n).fill(1);
 
-    // Fill left array
-    for (let i = 1; i < n; i++) {
-        left[i] = left[i - 1] * array[i - 1];
-    }
+  // Fill left array
+  for (let i = 1; i < n; i++) {
+    left[i] = left[i - 1] * array[i - 1];
+  }
 
-    // Fill right array
-    for (let j = n - 2; j >= 0; j--) {
-        right[j] = right[j + 1] * array[j + 1];
-    }
+  // Fill right array
+  for (let j = n - 2; j >= 0; j--) {
+    right[j] = right[j + 1] * array[j + 1];
+  }
 
-    // Calculate product array
-    for (let k = 0; k < n; k++) {
-        prod[k] = left[k] * right[k];
-    }
+  // Calculate product array
+  for (let k = 0; k < n; k++) {
+    prod[k] = left[k] * right[k];
+  }
 
-    return prod;
+  return prod;
 }
-console.log(productResult([10, 3, 5, 6, 2]));
+// console.log(productResult([10, 3, 5, 6, 2]));
+
+//Given an integer array, the task is to find the maximum product of any subarray.
+
+function maxSubArray(array: number[]): number[] {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] == 0 ) 
+    {
+      array = array.slice(array[i]);
+    }
+    if(array[i] == 1)
+    {
+      array = array.slice(array[i])
+    }
+  }
+  return array;
+}
+
+console.log(maxSubArray([0, 1, 2, 3, 4, 5]));
